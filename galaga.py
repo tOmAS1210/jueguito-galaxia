@@ -5,7 +5,7 @@ import galaga_enemigos
 import galaga_personaje
 import galaga_disparo
 import galaga_disparo_enemigo
-import sqlite3
+#import sqlite3
 from funciones import *
 
     
