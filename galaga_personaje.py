@@ -2,7 +2,7 @@ import pygame
 import colores
 import random
 import galaga_disparo
-disparo = galaga_disparo.Disparo_personaje()
+disparo = galaga_disparo.DisparoPersonaje()
 
 class Personaje(pygame.sprite.Sprite): #clase con sub clase de sprite
     def __init__(self) -> None:
@@ -19,7 +19,7 @@ class Personaje(pygame.sprite.Sprite): #clase con sub clase de sprite
         self.ultimo_disparo = pygame.time.get_ticks() #tiene un tiempo determinado al no estar en un while o for que haga aumentar su tiempo
         
 
-    def update(self):
+    def update(self): #metodos
         lista_teclas = pygame.key.get_pressed()
         if True in lista_teclas:
             if self.rect.x > 0:

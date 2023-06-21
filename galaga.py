@@ -55,10 +55,10 @@ game_over_fondo = conseguir_imagen("fondo_fin_del_juego.jpg",800,800)
 game_over_texto = conseguir_imagen("mensaje_fin_del_juego.png",300,200)
 
 #-----------imagen puntos-------------------
-fondo_puntaje = conseguir_imagen("puntaje_fondo.jpg",800,800)
-fondo_del_fondo_puntaje = conseguir_imagen("puntaje_fondo_fondo.png",200,200)
+fondo_puntaje = conseguir_imagen("puntaje_fondo.jpg",800,800) #el perro
+fondo_del_fondo_puntaje = conseguir_imagen("puntaje_fondo_fondo.png",200,200) #el agujero que tapa el sol del perro
 #-----------fps----------------
-clock = pygame.time.Clock()
+clock = pygame.time.Clock() #creo un objeto que ayuda a controlar el tiempo
 
 #-----------sprite lista-------
 all_lista_sprite = pygame.sprite.Group() #permite controlar un grupo de objetos de tipo sprite (aca guardo los sprites de mi nave, enemigos y disparos)
@@ -67,11 +67,8 @@ lista_disparos = pygame.sprite.Group()
 lista_disparos_enemigos = pygame.sprite.Group()
 
 #-----------personaje----------
-personaje = galaga_personaje.Personaje()
+personaje = galaga_personaje.Personaje() #instanciamos la clase personaje
 all_lista_sprite.add(personaje)
-
-coldown_personaje = 500
-ultimo_disparo_personaje = pygame.time.get_ticks()
 
 #-----------enemigos-----------
 for i in range(35):
@@ -86,11 +83,8 @@ ultimo_disparo_enemigo = pygame.time.get_ticks() #tiene un tiempo determinado al
 timer_segundos = pygame.USEREVENT #este es un evento que creo yo mismo
 pygame.time.set_timer(timer_segundos,10)
 
-#timer_game_over = pygame.USEREVENT + 1 #este es un evento que creo yo mismo
-#pygame.time.set_timer(timer_game_over,1000)
-
 #------------ingreso de texto-------------
-font_input = pygame.font.SysFont("segoeuisemibold", 30)
+font_input = pygame.font.SysFont("segoeuisemibold", 30) #obtengo la fuente que tendra la letra y su tamaño
 usuario = ''
 
 #-----------derrota-----------------
@@ -99,7 +93,7 @@ derrota = 0
 #-----------menu,juego,puntos------------
 opciones = 0
 
-#-----------cronometro--------------
+#-----------cronometro del juego, si llega a 0 termina el juego--------------
 cantidad_vueltas_tiempo = 0 #cierta cantidad de vueltas sera un segundo (40 vueltas)
 tiempo_de_juego = 120 #le voy restando 1 cada segundo
 
@@ -116,20 +110,20 @@ while flag_correr:
     #-------------menu de inicio-----------------
     if opciones == 0:
             
-        #-----------fondo-------------    
+        #-----------muestro el fondo-------------    
         ventana.blit(imagen_inicio,posicion_fondo)
         
-        #-----------jugar--------------
+        #-----------muestro el boton jugar--------------
         rect_jugar = pygame.draw.rect(ventana,colores.WHITE,(200,400,150,50)) #para la colision
         ventana.blit(imagen_boton,(200,400))
         ventana.blit(imagen_jugar_boton,(200,400))    
         
-        #-----------puntaje------------
+        #-----------muestro el boton puntaje------------
         rect_puntaje = pygame.draw.rect(ventana,colores.WHITE,(470,400,150,50)) #para la colision
         ventana.blit(imagen_boton,(470,400))
         ventana.blit(imagen_puntaje_boton,(470,400))
         
-        #-----------titulo-------------
+        #-----------muestro el titulo-------------
         ventana.blit(imagen_marco_titulo,(285,130))
         ventana.blit(imagen_titulo,(300,130))
 
@@ -137,7 +131,7 @@ while flag_correr:
         for evento in lista_eventos:
             if evento.type == pygame.QUIT:
                 flag_correr = False
-                
+
             if evento.type == pygame.MOUSEBUTTONDOWN:
                 if rect_jugar.collidepoint(evento.pos) and len(usuario) != 0: #el rect colisiona con la cordenada del mouse
                     opciones = 1
@@ -153,10 +147,12 @@ while flag_correr:
                         
                         for enemigos in lista_enemigos:
                             enemigos.posicion_inicial()
-                        
+                else:
+                    print("ingrese un nombre antes de jugar")
+
                 if rect_puntaje.collidepoint(evento.pos):    
                     opciones = 2
-                    
+        
         #-------------colocar usuario------------------------             
             if evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_BACKSPACE:
@@ -168,7 +164,7 @@ while flag_correr:
         pygame.draw.rect(ventana, colores.WHITE, rect_usuario, 2)
         font_input_surface = font_input.render(usuario, True, colores.WHITE)
         ventana.blit(font_input_surface,(rect_usuario.x+20, rect_usuario.y+10))
-        
+    
     #------------------pantalla jugable-----------------    
     elif opciones == 1:
         for evento in lista_eventos:
@@ -179,13 +175,13 @@ while flag_correr:
             if evento.type == pygame.USEREVENT:
                 if evento.type == timer_segundos:
                     all_lista_sprite.update()
-            
+        
             #----------------disparo del personaje----------------    
             if evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_SPACE:
                         ahora = pygame.time.get_ticks()
                         if ahora - personaje.ultimo_disparo > personaje.cadencia:
-                            disparo = galaga_disparo.Disparo_personaje()
+                            disparo = galaga_disparo.DisparoPersonaje()
                             disparo.rect.x = personaje.rect.x + 30
                             disparo.rect.y = personaje.rect.y - 20
                             all_lista_sprite.add(disparo)
@@ -193,12 +189,12 @@ while flag_correr:
                             sonido_disparo.set_volume(0.05)
                             sonido_disparo.play()
                             personaje.ultimo_disparo = ahora
-                    
+
         #--------disparo y coldown del enemigo---------
         tiempo_actual = pygame.time.get_ticks()
         if tiempo_actual - enemigos.ultimo_disparo > enemigos.cadencia and len(lista_enemigos) > 0:
             enemigo_atacando = random.choice(lista_enemigos.sprites()) #elige un enemigo al azar para que sea el que ataque
-            disparos_enemigos = galaga_disparo_enemigo.Disparo_enemigos(enemigo_atacando.rect.centerx,enemigo_atacando.rect.bottom) #bottom = abajo 
+            disparos_enemigos = galaga_disparo_enemigo.DisparoEnemigos(enemigo_atacando.rect.centerx,enemigo_atacando.rect.bottom) #bottom = abajo 
             all_lista_sprite.add(disparos_enemigos)
             lista_disparos_enemigos.add(disparos_enemigos)
             enemigos.ultimo_disparo = tiempo_actual #luego de que un enemigo dispare, el ultimo disparo pasa a ser el mas actual
@@ -222,13 +218,13 @@ while flag_correr:
         #-------------si hay colision entre mi disparo y un enemigo gano puntos------------   
         if enemigo_hit_lista: 
             personaje.score += 100
-                
+        
         #-------------------elimino mi disparo si se va de la pantalla-------------------
         for disparo in lista_disparos:
             if disparo.rect.y < -10: #si el disparo se va del limite, se lo remueve
                 all_lista_sprite.remove(disparo)
                 lista_disparos.remove(disparo)
-                
+        
         #------------barra de vida----------------------
         if personaje.vida == 3:
             ventana.blit(vida_llena,(0,740))
@@ -242,7 +238,7 @@ while flag_correr:
             ventana.blit(vida_llena,(0,740))
             ventana.blit(vida_vacia,(40,740))
             ventana.blit(vida_vacia,(80,740))
-            
+        
         #-----------colicion entre un enemigo y el jugador------------
         enemigo_impactado = pygame.sprite.spritecollide(personaje,lista_enemigos,True) #si un enemigo me colpea, se elimina
         if enemigo_impactado:
@@ -256,7 +252,7 @@ while flag_correr:
         personaje_disparado = pygame.sprite.spritecollide(personaje,lista_disparos_enemigos,True)
         if personaje_disparado:
             personaje.vida -= 1
-            
+        
         #----------mostrar el puntaje---------------------
         mostrar_score(ventana,personaje.score)
         
@@ -273,7 +269,7 @@ while flag_correr:
         if cantidad_vueltas_tiempo == 40:
             cantidad_vueltas_tiempo = 0
             tiempo_de_juego -= 1
-            
+        
         #---------game over-----------------
         if derrota == 1:
             all_lista_sprite.remove(lista_disparos) #al morir remuevo los disparos
@@ -288,7 +284,7 @@ while flag_correr:
             cantidad_vueltas_derrota += 1
             if cantidad_vueltas_derrota == 120: #120 equivaldria a unos 3 segundos aprox
                 
-                comitear_tabla(usuario,personaje.score)
+                subir_tabla(usuario,personaje.score)
                 cantidad_vueltas_derrota = 0
                 opciones = 0
                 derrota = 2

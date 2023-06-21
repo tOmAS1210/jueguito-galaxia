@@ -3,7 +3,7 @@ import colores
 import random
 import galaga_personaje
 import galaga_disparo
-disparo = galaga_disparo.Disparo_personaje()
+disparo = galaga_disparo.DisparoPersonaje()
 
 #-----------enemigos-----------
 class Enemigos(pygame.sprite.Sprite):

@@ -4,7 +4,7 @@ import colores
 import random
 import galaga_personaje
 
-class Disparo_personaje(pygame.sprite.Sprite):
+class DisparoPersonaje(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.image = pygame.image.load("galaga_laser.png")
