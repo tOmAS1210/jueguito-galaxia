@@ -7,7 +7,7 @@ import galaga_personaje
 class DisparoEnemigos(pygame.sprite.Sprite):
     def __init__(self,x,y):
         super().__init__()
-        self.image = pygame.image.load("galaga_laser_enemigo.png")
+        self.image = pygame.image.load("images/galaga_laser_enemigo.png")
         self.image = pygame.transform.scale(self.image,(10,50))
         self.image.set_colorkey(colores.BLACK)
         self.rect = self.image.get_rect()

@@ -8,7 +8,7 @@ import galaga_disparo_enemigo
 #import sqlite3
 from funciones import *
 
-    
+        
 ANCHO_VENTANA = 800
 ALTO_VENTANA = 800
 
@@ -16,52 +16,53 @@ pygame.init()
 #-----------sonido--------------
 pygame.mixer.init()
 #pygame.mixer.music.set_volume(0)
-sonido_disparo = pygame.mixer.Sound("disparo_laser.mp3")
-sonido_fondo = pygame.mixer.Sound("undertale_sonido.mp3")
+sonido_disparo = pygame.mixer.Sound("sound/disparo_laser.mp3")
+sonido_fondo = pygame.mixer.Sound("sound/undertale_sonido.mp3")
 sonido_fondo.set_volume(0.01)
-sonido_fondo.play(-1)
+sonido_fondo.play(-1) #para que se escuche en bucle
 
 #-----------ventana------------------
 ventana = pygame.display.set_mode((ANCHO_VENTANA,ALTO_VENTANA))
 pygame.display.set_caption("juego de navesitas")
 
 #-----------fondo inicio-------------
-imagen_inicio = conseguir_imagen("fondo_inicio.jpg",800,800)
+imagen_inicio = conseguir_imagen("images/fondo_inicio.jpg",800,800)
 
 #-----------boton inicio-----------
-imagen_boton = conseguir_imagen("boton_galaga.png",150,50)
+imagen_boton = conseguir_imagen("images/boton_galaga.png",150,50)
 
 #-----------texto para boton inicio------------------
-imagen_jugar_boton = conseguir_imagen("jugar.png",150,50)
-imagen_puntaje_boton = conseguir_imagen("puntaje.png",150,50)
+imagen_jugar_boton = conseguir_imagen("images/jugar.png",150,50)
+imagen_puntaje_boton = conseguir_imagen("images/puntaje.png",150,50)
 
 #-------------flecha para atras---------------------
-imagen_retroceder = conseguir_imagen("flecha_atras.png",120,50)
+imagen_retroceder = conseguir_imagen("images/flecha_atras.png",120,50)
 
 #-----------marco titulo-------------
-imagen_marco_titulo = conseguir_imagen("marco_titulo.png",300,100)
-imagen_titulo = conseguir_imagen("logo.png",250,100)
+imagen_marco_titulo = conseguir_imagen("images/marco_titulo.png",300,100)
+imagen_titulo = conseguir_imagen("images/logo.png",250,100)
 #-----------fondo juego--------------
-imagen_fondo = conseguir_imagen("fondo_galaga.jpg",800,800)
+imagen_fondo = conseguir_imagen("images/fondo_galaga.jpg",800,800)
 y = 0
 posicion_fondo = [0,y]
 
 #----------imagen vida personaje---------------
-vida_llena = conseguir_imagen("vida llena.png",50,50)
-vida_vacia = conseguir_imagen("vida vacia.png",50,50)
+vida_llena = conseguir_imagen("images/vida llena.png",50,50)
+vida_vacia = conseguir_imagen("images/vida vacia.png",50,50)
 
 #-----------imagen game over----------------
-game_over_fondo = conseguir_imagen("fondo_fin_del_juego.jpg",800,800)
-game_over_texto = conseguir_imagen("mensaje_fin_del_juego.png",300,200)
+game_over_fondo = conseguir_imagen("images/fondo_fin_del_juego.jpg",800,800)
+game_over_texto = conseguir_imagen("images/mensaje_fin_del_juego.png",300,200)
 
 #-----------imagen puntos-------------------
-fondo_puntaje = conseguir_imagen("puntaje_fondo.jpg",800,800) #el perro
-fondo_del_fondo_puntaje = conseguir_imagen("puntaje_fondo_fondo.png",200,200) #el agujero que tapa el sol del perro
+fondo_puntaje = conseguir_imagen("images/puntaje_fondo.jpg",800,800) #el perro
+fondo_del_fondo_puntaje = conseguir_imagen("images/puntaje_fondo_fondo.png",200,200) #el agujero que tapa el sol del perro
 #-----------fps----------------
 clock = pygame.time.Clock() #creo un objeto que ayuda a controlar el tiempo
 
 #-----------sprite lista-------
 all_lista_sprite = pygame.sprite.Group() #permite controlar un grupo de objetos de tipo sprite (aca guardo los sprites de mi nave, enemigos y disparos)
+#all lista sprite lo uso para los movimientos de todos los sprites y mostrarlos o removerlos del juego
 lista_enemigos = pygame.sprite.Group() #permite controlar objetos de tipo sprite (aca guardo el sprite de los enemigos)
 lista_disparos = pygame.sprite.Group()
 lista_disparos_enemigos = pygame.sprite.Group()
@@ -76,8 +77,7 @@ for i in range(35):
     lista_enemigos.add(enemigos)
     all_lista_sprite.add(enemigos)
 
-enemigo_cooldown = 1000 #disparo coldown en milisegundos
-ultimo_disparo_enemigo = pygame.time.get_ticks() #tiene un tiempo determinado al no estar en un while o for que haga aumentar su tiempo
+
 
 #------------timer-------------
 timer_segundos = pygame.USEREVENT #este es un evento que creo yo mismo

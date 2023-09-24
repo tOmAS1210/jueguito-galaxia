@@ -6,10 +6,10 @@ import galaga_disparo
 disparo = galaga_disparo.DisparoPersonaje()
 
 #-----------enemigos-----------
-class Enemigos(pygame.sprite.Sprite):
+class Enemigos(pygame.sprite.Sprite): #clase para objetos de juego visibles 
     def __init__(self):
         super().__init__()
-        nave = ["nave_enemiga.png","nave_enemiga_2.png"]
+        nave = ["images/nave_enemiga.png","images/nave_enemiga_2.png"]
         self.image = pygame.image.load(random.choice(nave))
         self.image = pygame.transform.scale(self.image,(70,70))
         self.rect = self.image.get_rect()

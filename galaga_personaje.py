@@ -7,7 +7,7 @@ disparo = galaga_disparo.DisparoPersonaje()
 class Personaje(pygame.sprite.Sprite): #clase con sub clase de sprite
     def __init__(self) -> None:
         super().__init__()
-        self.image = pygame.image.load("nave_personaje.png")
+        self.image = pygame.image.load("images/nave_personaje.png") #atributos
         self.image = pygame.transform.scale(self.image,(70,70))
         self.rect = self.image.get_rect()
         self.rect.centerx = 400
@@ -18,8 +18,8 @@ class Personaje(pygame.sprite.Sprite): #clase con sub clase de sprite
         self.cadencia = 500 #disparo coldown en milisegundos
         self.ultimo_disparo = pygame.time.get_ticks() #tiene un tiempo determinado al no estar en un while o for que haga aumentar su tiempo
         
-
-    def update(self): #metodos
+    #metodos
+    def update(self): #movimiento izq y der
         lista_teclas = pygame.key.get_pressed()
         if True in lista_teclas:
             if self.rect.x > 0:
@@ -31,7 +31,7 @@ class Personaje(pygame.sprite.Sprite): #clase con sub clase de sprite
                     self.rect.x += 5
                     disparo.update()
     
-    def posicion_inicial(self):
+    def posicion_inicial(self): #dibujar al personaje en la pantalla
         self.rect.centerx = 400
         self.rect.y = 700
 
