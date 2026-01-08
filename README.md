@@ -12,7 +12,7 @@ Clon del clásico videojuego Galaga desarrollado en Python como proyecto académ
 - [ ] Pantallas de inicio/game over
 
 ## Tecnologías
-- Python 3
+- Python
 - Pygame (si lo usaste)
 - Programación Orientada a Objetos
 
