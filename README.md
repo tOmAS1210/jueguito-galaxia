@@ -13,7 +13,7 @@ Clon del clásico videojuego Galaga desarrollado en Python como proyecto académ
 
 ## Tecnologías
 - Python
-- Pygame (si lo usaste)
+- Pygame
 - Programación Orientada a Objetos
 
 ## Cómo ejecutar
