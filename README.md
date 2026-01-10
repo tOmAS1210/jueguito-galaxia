@@ -6,7 +6,7 @@ Este proyecto me enseñó los fundamentos de POO, lógica de juego y estructura 
 
 ✅ **Logrado:** Mecánicas completas, código bien estructurado, aprendizaje profundo 
 
-🔧 **Por mejorar:** Interfaz visual
+🔧 **Por mejorar:** Interfaz visual Completa
 
 ## 📸 Capturas de Pantalla
 
