@@ -1,15 +1,38 @@
 # Galaga Python Game
 
 ## Descripción
-Clon del clásico videojuego Galaga desarrollado en Python como proyecto académico.
+Un clon funcional del arcade clásico, desarrollado durante mi primer año en la Tecnicatura en Programación. 
+Este proyecto me enseñó los fundamentos de POO, lógica de juego y estructura de proyectos.
+
+✅ **Logrado:** Mecánicas completas, código bien estructurado, aprendizaje profundo 
+🔧 **Por mejorar:** Interfaz visual
+
+## 📸 Capturas de Pantalla
+
+| Menú Principal |
+<img width="815" height="843" alt="Inicio" src="https://github.com/user-attachments/assets/aa3f5f86-f0b1-4ec2-9d7f-6367cddba563" />
+
+| Sistema de Puntuación |
+<img width="958" height="839" alt="Puntajes" src="https://github.com/user-attachments/assets/2ce35978-0d90-4250-a134-3162491b3673" />
+
+| Jugabilidad | 
 
 ## Características implementadas
-- [ ] Movimiento de nave del jugador (4 direcciones)
-- [ ] Naves enemigas con patrón de movimiento
-- [ ] Sistema de disparos (jugador y enemigos)
-- [ ] Detección de colisiones
-- [ ] Sistema de vidas y puntuación
-- [ ] Pantallas de inicio/game over
+✅ **Mecánicas básicas del juego:**
+- Control de nave del jugador (movimiento en 2 direcciones)
+- Generación automática de oleadas de naves enemigas
+- Sistema de disparos (jugador y enemigos)
+- Detección de colisiones entre proyectiles y naves
+
+✅ **Sistemas del juego:**
+- Contador de vidas (3 vidas iniciales)
+- Sistema de puntuación en tiempo real
+- Pantallas de inicio y game over
+
+✅ **Arquitectura del código:**
+- Programación Orientada a Objetos (POO)
+- Clases bien estructuradas: `NaveJugador`, `Enemigo`, `Proyectil`
+- Código modular y comentado completamente
 
 ## Tecnologías
 - Python
